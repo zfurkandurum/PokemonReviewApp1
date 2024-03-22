@@ -1,4 +1,4 @@
-namespace PokemonReviewApp.Models;
+namespace PokemonReviewApp1.Models;
 
 public class Owner
 {

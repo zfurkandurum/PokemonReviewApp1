@@ -1,6 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
-using PokemonReviewApp.Models;
-using PokemonReviewApp1.Data;
+using PokemonReviewApp1.Models;
 using PokemonReviewApp1.Interfaces;
 
 namespace PokemonReviewApp1.Controllers;

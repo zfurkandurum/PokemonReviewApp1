@@ -1,12 +1,14 @@
 using AutoMapper;
-using PokemonReviewApp.Models;
-using PokemonReviewApp1.Dto;
+using PokemonReviewApp1.Controllers;
+using PokemonReviewApp1.DTO;
+using PokemonReviewApp1.Models;
+
 namespace PokemonReviewApp1.Helper;
 
 public class MappingProfiles : Profile
 {
     public MappingProfiles()
     {
-       CreateMap<Pokemon, PokemonDto>
+        CreateMap<Pokemon, PokemonDto >();
     }
 }

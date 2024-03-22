@@ -1,4 +1,4 @@
-using PokemonReviewApp.Models;
+using PokemonReviewApp1.Models;
 
 namespace PokemonReviewApp1.Interfaces;
 

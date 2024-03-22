@@ -24,6 +24,7 @@
 
     <ItemGroup>
       <Compile Remove="Dto\PokemonDTO.cs" />
+      <Compile Include="DTO\PokemonDto.cs" />
     </ItemGroup>
 
 </Project>
