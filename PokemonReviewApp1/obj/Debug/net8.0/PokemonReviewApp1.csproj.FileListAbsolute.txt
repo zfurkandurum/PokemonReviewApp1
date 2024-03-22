@@ -136,3 +136,5 @@
 /Users/zekifurkandurum/RiderProjects/PokemonReviewApp1/PokemonReviewApp1/obj/Debug/net8.0/PokemonReviewApp1.pdb
 /Users/zekifurkandurum/RiderProjects/PokemonReviewApp1/PokemonReviewApp1/obj/Debug/net8.0/PokemonReviewApp1.genruntimeconfig.cache
 /Users/zekifurkandurum/RiderProjects/PokemonReviewApp1/PokemonReviewApp1/obj/Debug/net8.0/ref/PokemonReviewApp1.dll
+/Users/zekifurkandurum/RiderProjects/PokemonReviewApp1/PokemonReviewApp1/bin/Debug/net8.0/AutoMapper.dll
+/Users/zekifurkandurum/RiderProjects/PokemonReviewApp1/PokemonReviewApp1/bin/Debug/net8.0/AutoMapper.Extensions.Microsoft.DependencyInjection.dll
