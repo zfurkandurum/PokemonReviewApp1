@@ -1,0 +1,16 @@
+using PokemonReviewApp1.Models;
+
+namespace PokemonReviewApp1.Interfaces;
+
+public interface IOwnerRepository
+{
+    ICollection<Owner> GetOwners();
+
+    Owner GetOwner(int ownerId);
+
+    ICollection<Owner> GetOwnerOfAPokemons(int pokeId);
+
+    ICollection<Pokemon> GetPokemonByOwner(int ownerId);
+    
+    bool OwnerExists(int ownerId);
+}
