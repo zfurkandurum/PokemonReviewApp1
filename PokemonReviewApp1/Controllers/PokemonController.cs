@@ -68,4 +68,34 @@ public class PokemonController : Controller
 
         return Ok(rating);
     }
+    [HttpPost]
+    [ProducesResponseType(204)]
+    [ProducesResponseType(400)]
+    public IActionResult CreatePokemon([FromBody] PokemonDto pokemonCreate)
+    {
+        if (pokemonCreate == null)
+            return BadRequest(ModelState);
+
+        var pokemon = _pokemonRepository.getPokemons()
+            .Where(p => p.Name.Trim().ToUpper() == pokemonCreate.Name.TrimEnd().ToUpper()).FirstOrDefault();
+
+        if (pokemon != null)
+        {
+            ModelState.AddModelError("","Already Exists");
+            return StatusCode(422, ModelState);
+        }
+
+        if (!ModelState.IsValid)
+            return BadRequest(ModelState);
+
+        var pokemonMap = _mapper.Map<Pokemon>(pokemonCreate);
+        
+        if (!_pokemonRepository.CreatePokemon(pokemonMap))
+        {
+            ModelState.AddModelError("","error");
+            return StatusCode(500, ModelState);
+        }
+
+        return Ok("Done");
+    }
 }

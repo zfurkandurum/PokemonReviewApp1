@@ -18,6 +18,8 @@ public class MappingProfiles : Profile
         CreateMap<CategoryDto, Category >();
         CreateMap<CountryDto, Country >();
         CreateMap<OwnerDto, Owner >();
+        CreateMap<PokemonDto, Pokemon>();
+
 
 
     }

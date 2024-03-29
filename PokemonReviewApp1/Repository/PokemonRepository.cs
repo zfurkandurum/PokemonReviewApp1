@@ -45,4 +45,16 @@ public class PokemonRepository : IPokemonRepository
     {
         return _context.Pokemons.Any(p => p.Id == pokeId); 
     }
+
+    public bool CreatePokemon(Pokemon pokemon)
+    {
+        _context.Pokemons.Add(pokemon);
+        return Save();
+    }
+
+    public bool Save()
+    {
+        var saved = _context.SaveChanges();
+        return saved > 0 ? true : false;
+    }
 }
