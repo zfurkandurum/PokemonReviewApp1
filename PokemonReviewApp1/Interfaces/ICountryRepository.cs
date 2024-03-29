@@ -12,4 +12,7 @@ public interface ICountryRepository
     ICollection<Owner> GetOwnerFromCountry(int countryId);
 
     bool CountryExits(int id);
+
+    bool CreateCountry(Country country);
+    bool Save();
 }
