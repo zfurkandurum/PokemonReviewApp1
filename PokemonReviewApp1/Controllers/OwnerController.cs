@@ -1,5 +1,6 @@
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 using PokemonReviewApp1.DTO;
 using PokemonReviewApp1.Interfaces;
 using PokemonReviewApp1.Models;
@@ -102,6 +103,32 @@ public class OwnerController : Controller
         }
 
         return Ok("Done");
+    }
+
+    [HttpPut("{ownerId}")]
+    [ProducesResponseType(400)]
+    [ProducesResponseType(204)]
+    [ProducesResponseType(404)]
+    public IActionResult UpdateOwner(int ownerId, [FromBody] OwnerDto updatedOwner)
+    {
+        if (updatedOwner == null)
+            return BadRequest(ModelState);
+        if (ownerId != updatedOwner.Id)
+            return BadRequest(ModelState);
+        if (!_ownerRepository.OwnerExists(ownerId))
+            return NotFound();
+        if (!ModelState.IsValid)
+            return BadRequest();
+
+        var ownerMap = _mapper.Map<Owner>(updatedOwner);
+
+        if (!_ownerRepository.UpdateOwner(ownerMap))
+        {
+            ModelState.AddModelError("","error");
+            return StatusCode(500, ModelState);
+        }
+
+        return Ok();
     }
 
 }
