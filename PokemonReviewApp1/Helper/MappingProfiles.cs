@@ -19,6 +19,8 @@ public class MappingProfiles : Profile
         CreateMap<CountryDto, Country >();
         CreateMap<OwnerDto, Owner >();
         CreateMap<PokemonDto, Pokemon>();
+        CreateMap<ReviewDto, Review >();
+
 
 
 
