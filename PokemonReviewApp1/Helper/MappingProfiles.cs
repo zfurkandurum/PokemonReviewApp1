@@ -20,9 +20,6 @@ public class MappingProfiles : Profile
         CreateMap<OwnerDto, Owner >();
         CreateMap<PokemonDto, Pokemon>();
         CreateMap<ReviewDto, Review >();
-
-
-
-
+        CreateMap<ReviewerDto, Reviewer >();
     }
 }
