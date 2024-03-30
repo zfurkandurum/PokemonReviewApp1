@@ -13,7 +13,7 @@ public interface IReviewerRepository
     bool ReviewerExists(int reviewerId);
 
     bool CreateReviewer(Reviewer reviewer);
-
+    bool UpdateReviewer(Reviewer reviewer);
     bool Save();
 
 }
