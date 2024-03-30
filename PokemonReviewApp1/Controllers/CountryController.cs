@@ -1,6 +1,7 @@
 using AutoMapper;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.EntityFrameworkCore;
 using PokemonReviewApp1.DTO;
 using PokemonReviewApp1.Interfaces;
@@ -96,4 +97,32 @@ public class CountryController : Controller
         return Ok("Done");
     }
 
+    [HttpPut("{countryId}")]
+    [ProducesResponseType(400)]
+    [ProducesResponseType(204)]
+    [ProducesResponseType(404)]
+    public IActionResult UpdateCountry(int countryId, [FromBody] CountryDto updatedCountry)
+    {
+        if (updatedCountry == null)
+            return BadRequest(ModelState);
+        
+        if (countryId != updatedCountry.Id)
+            return BadRequest(ModelState);
+
+        if (!_countryRepository.CountryExits(countryId)) 
+            return NotFound();
+
+        if (!ModelState.IsValid)
+            return BadRequest();
+
+        var countryMap = _mapper.Map<Country>(updatedCountry);
+
+        if (!_countryRepository.UpdateCountry(countryMap))
+        {
+            ModelState.AddModelError("","error");
+            return StatusCode(500, ModelState);
+        }
+        
+        return Ok();
+    }
 }

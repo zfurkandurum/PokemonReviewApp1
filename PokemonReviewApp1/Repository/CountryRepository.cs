@@ -1,4 +1,5 @@
 using AutoMapper;
+using Microsoft.EntityFrameworkCore;
 using PokemonReviewApp1.Data;
 using PokemonReviewApp1.Interfaces;
 using PokemonReviewApp1.Models;
@@ -43,6 +44,12 @@ public class CountryRepository : ICountryRepository
     public bool CreateCountry(Country country)
     {
         _context.Add(country);
+        return Save();
+    }
+
+    public bool UpdateCountry(Country country)
+    {
+        _context.Update(country);
         return Save();
     }
 
