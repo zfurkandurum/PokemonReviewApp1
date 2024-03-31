@@ -1,5 +1,7 @@
 using AutoMapper;
+using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 using PokemonReviewApp1.DTO;
 using PokemonReviewApp1.Interfaces;
 using PokemonReviewApp1.Models;
@@ -123,4 +125,26 @@ public class CategoryController : Controller
         }
         return NoContent();
     }
+
+    [HttpDelete("{categoryId}")]
+    [ProducesResponseType(400)]
+    [ProducesResponseType(204)]
+    [ProducesResponseType(404)]
+    public IActionResult DeleteCategory(int categoryId)
+    {
+        if (!_categoryRepository.CategoryExits(categoryId))
+            return NotFound();
+
+        var categoryDelete = _categoryRepository.GetCategory(categoryId);
+        
+        if(!ModelState.IsValid)
+            return BadRequest(ModelState);
+
+        if (!_categoryRepository.DeleteCategory(categoryDelete))
+        {
+            ModelState.AddModelError("","error");
+        }
+
+        return Ok();
+    }       
 }
