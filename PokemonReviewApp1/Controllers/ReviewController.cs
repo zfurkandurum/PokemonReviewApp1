@@ -136,7 +136,7 @@ public class ReviewController : Controller
     [ProducesResponseType(404)]
     public IActionResult DeleteReview(int reviewId)
     {
-        if (_reviewRepository.ReviewExists(reviewId))
+        if (!_reviewRepository.ReviewExists(reviewId))
             return BadRequest(ModelState);
 
         var deleteReview = _reviewRepository.GetReview(reviewId);
