@@ -1,4 +1,5 @@
 using AutoMapper;
+using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using PokemonReviewApp1.DTO;
@@ -131,4 +132,25 @@ public class OwnerController : Controller
         return Ok();
     }
 
+    [HttpDelete("{ownerId}")]
+    [ProducesResponseType(400)]
+    [ProducesResponseType(204)]
+    [ProducesResponseType(404)]
+    public IActionResult DeleteOwner(int ownerId)
+    {
+        if (!_ownerRepository.OwnerExists(ownerId))
+            return BadRequest(ModelState);
+
+        var deleteOwner = _ownerRepository.GetOwner(ownerId);
+
+        if (!ModelState.IsValid)
+            return BadRequest(ModelState);
+
+        if (!_ownerRepository.DeleteOwner(deleteOwner))
+        {
+            ModelState.AddModelError("","error");
+        }
+        
+        return Ok();
+    }
 }
