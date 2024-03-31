@@ -14,5 +14,6 @@ public interface IReviewRepository
 
     bool CreateReview(Review review);
     bool UpdateReview(Review review);
+    bool DeleteReview(Review review);
     bool Save();
 }

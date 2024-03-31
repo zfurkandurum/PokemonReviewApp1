@@ -1,4 +1,5 @@
 using AutoMapper;
+using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 using PokemonReviewApp1.DTO;
 using PokemonReviewApp1.Interfaces;
@@ -129,4 +130,25 @@ public class ReviewController : Controller
         return Ok();
     }
 
+    [HttpDelete("{reviewId}")]
+    [ProducesResponseType(400)]
+    [ProducesResponseType(204)]
+    [ProducesResponseType(404)]
+    public IActionResult DeleteReview(int reviewId)
+    {
+        if (_reviewRepository.ReviewExists(reviewId))
+            return BadRequest(ModelState);
+
+        var deleteReview = _reviewRepository.GetReview(reviewId);
+
+        if (!ModelState.IsValid)
+            return BadRequest(ModelState);
+        
+        if (!_reviewRepository.DeleteReview(deleteReview))
+        {
+            ModelState.AddModelError("","error");
+        }
+
+        return Ok();
+    }
 }
