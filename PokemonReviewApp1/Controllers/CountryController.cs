@@ -125,4 +125,26 @@ public class CountryController : Controller
         
         return Ok();
     }
+
+    [HttpDelete("{countryId}")]
+    [ProducesResponseType(400)]
+    [ProducesResponseType(204)]
+    [ProducesResponseType(404)]
+    public IActionResult DeleteCountry(int countryId)
+    {
+        if (!_countryRepository.CountryExits(countryId))
+            return BadRequest(ModelState);
+        
+        var deleteCountry = _countryRepository.GetCountry(countryId);
+
+        if (!ModelState.IsValid)
+            return BadRequest(ModelState);
+
+        if (!_countryRepository.DeleteCountry(deleteCountry))
+        {
+            ModelState.AddModelError("","error");
+        }
+
+        return Ok();
+    }
 }
