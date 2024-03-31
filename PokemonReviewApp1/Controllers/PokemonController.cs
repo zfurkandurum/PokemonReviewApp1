@@ -1,4 +1,5 @@
 using AutoMapper;
+using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 using PokemonReviewApp1.DTO;
 using PokemonReviewApp1.Models;
@@ -126,6 +127,28 @@ public class PokemonController : Controller
         {
             ModelState.AddModelError("","error");
             return StatusCode(500, ModelState);
+        }
+
+        return Ok();
+    }
+
+    [HttpDelete("{pokemonId}")]
+    [ProducesResponseType(400)]
+    [ProducesResponseType(204)]
+    [ProducesResponseType(404)]
+    public IActionResult DeletePokemon(int pokemonId)
+    {
+        if (!_pokemonRepository.PokemonExists(pokemonId))
+            return BadRequest(ModelState);
+
+        var deletePokemon = _pokemonRepository.GetPokemon(pokemonId);
+
+        if (!ModelState.IsValid)
+            return BadRequest(ModelState);
+
+        if (!_pokemonRepository.DeletePokemon(deletePokemon))
+        {
+            ModelState.AddModelError("","error");
         }
 
         return Ok();
