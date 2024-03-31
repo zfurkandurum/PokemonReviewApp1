@@ -130,7 +130,7 @@ public class ReviewerController : Controller
 
         var deleteReviewer = _reviewerRepository.GetReviewer(reviewerId);
 
-        if (ModelState.IsValid)
+        if (!ModelState.IsValid)
             return BadRequest(ModelState);
 
         if (!_reviewerRepository.DeleteReviewer(deleteReviewer))
